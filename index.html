@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- G Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <title>Boolzapp</title>
+</head>
+<body>
+
+    <div class="stripe">
+    </div>
+
+    <!-- Main -->
+    <main id="mySpace">
+
+        <!-- Left part -->
+        <section class="left_part">
+
+            <!-- User -->
+            <div class="user">
+
+                <div class="name_pic">
+
+                    <img src="https://unsplash.it/300/300?image=34" alt="user">
+                    <h4>Sofia</h4>
+                </div>
+
+                <div class="user_icons">
+
+                    <!-- icona 1 2 e 3 -->
+                    <a href="#">
+                        
+                        <i class="icon_asd fa-solid fa-circle-notch"></i>
+                    </a>
+                    <a href="#">
+
+                        <i class="icon_asd fa-solid fa-message"></i>
+                    </a>
+                    <a href="#">
+
+                        <i class="icon_asd fa-solid fa-ellipsis-vertical"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- Searchbar -->
+            <div class="bar">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input 
+                v-model="newSearch" 
+                @keyup="findFriend" 
+                type="text" 
+                placeholder="   Cerca o inizia una nuova chat">
+            </div>
+
+            <!-- Contacts -->
+            <!-- div che verrà ripetuto tante volte quanti sono i contatti nel data tramite un v-for -->
+            <div class="contacts">
+
+                <div 
+                v-for="(item, i, array) in contacts" 
+                class="name_pic card_c" 
+                :key="i"
+                @click="clickContact(i)"
+                :class="[i === activeChat ? 'active' : '', item.visible === false ? 'no_display' : ''] ">
+
+                    <img :src="item.avatar" :alt="item.name">
+
+                    <div class="usernamemsg">
+                        
+                        <h4>{{item.name}}</h4>
+                        <span>{{item.messages[item.messages.length - 1].message}}</span>
+                    </div>
+                    <div class="msg_hour">
+                        <span>{{item.messages[item.messages.length - 1].date}}</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Right part -->
+        <section class="right_part">
+
+            <!-- Friend -->
+            <div class="user">
+
+                <div 
+                class="name_pic">
+
+                    <img :src="contacts[activeChat].avatar" alt="contacts[activeChat].name">
+
+                    <div>
+                        
+                        <h4>{{contacts[activeChat].name}}</h4>
+                        <span>{{'Ultimo accesso oggi alle: ' + contacts[activeChat].messages[contacts[activeChat].messages.length - 1].date}}</span>
+                    </div>
+
+                </div>
+
+                <div class="user_icons">
+
+                    <!-- icona 1 2 e 3 -->
+                    <a href="#">
+
+                        <i class="icon_asd fa-solid fa-magnifying-glass"></i>
+                    </a>
+                    <a href="#">
+                        
+                        <i class="icon_asd fa-solid fa-paperclip"></i>
+                    </a>
+                    <a href="#">
+                        
+                        <i class="icon_asd fa-solid fa-ellipsis-vertical"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Chat -->
+            <div class="chat">
+
+                <!-- creazione di dive contentente messaggi, se mandato da friend associa classe verde che lo sposta a destra, se lo manda l'utente associa classe bianca che lo sposta a sinistra -->
+                <div 
+                class="msg_line"
+                v-for="(item2, j) in contacts[activeChat].messages" 
+                :key="j"
+                :class="item2.status === 'sent' ? 'sent_position' : '' ">
+                    <div 
+                    class="chat_box"
+                    :class="item2.status === 'sent' ? 'sent_color' : 'received_color' ">
+
+                        <div class="msg_box">
+
+                            <p>
+                                {{item2.message}}
+
+                                <div 
+                                class="popup_info"
+                                :class="checkPop === j ? 'display_popup' : '' ">
+                                    <p>Message info</p>
+                                    <p
+                                    @click="deleteMsg(j)">
+                                    Delete message</p>
+                                </div>
+                            </p>
+                            <i 
+                            @click="popUp(j)"
+                            class="fa-solid fa-angle-down">
+                            </i>
+                            
+                        </div>
+
+                        <div class="time_space">
+
+                            <span>{{item2.date}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Your chat -->
+            <div class="your_chat bar">
+
+                <a href="#">
+
+                    <i class="fa-regular fa-face-smile"></i>
+                </a>
+                <input 
+                v-model="newMessage"
+                @keyup.enter="addMessage" 
+                type="text" 
+                placeholder="   Scrivi un messaggio">
+                <a href="#">
+                
+                    <i class="fa-solid fa-microphone"></i>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- My JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+
+</body>
+</html>
