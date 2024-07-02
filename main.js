@@ -173,6 +173,9 @@ const myRoot = new Vue ({
         ]        
     },
     methods: {
+        clickContact(index){
+            this.activeChat = index;
+        },
 
     }
 });
