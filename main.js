@@ -176,9 +176,31 @@ const myRoot = new Vue ({
         clickContact(index){
             this.activeChat = index;
         },
-
+        popUp(index){
+            if (this.checkPop !== index) {
+                this.checkPop = index;
+                console.log(this.checkPop);
+            } else {
+                this.checkPop = -1
+                console.log(this.checkPop);
+            }
+        },
+        findFriend(){
+            this.contacts.forEach((element, i) => {
+                if (this.contacts[i].name.toLowerCase().includes(this.newSearch.toLowerCase())) {
+                    this.contacts[i].visible = true;
+                    console.log("yes", this.contacts[i].visible);
+                } else {
+                    this.contacts[i].visible = false
+                    console.log("no", this.contacts[i].visible);
+                }
+            });
+        },
+ 
     }
 });
+
+
 
 
 

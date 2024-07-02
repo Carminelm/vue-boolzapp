@@ -19,13 +19,10 @@
     <div class="stripe">
     </div>
 
-    <!-- Main -->
     <main id="mySpace">
 
-        <!-- Left part -->
         <section class="left_part">
 
-            <!-- User -->
             <div class="user">
 
                 <div class="name_pic">
@@ -36,7 +33,7 @@
 
                 <div class="user_icons">
 
-                    <!-- icona 1 2 e 3 -->
+          
                     <a href="#">
                         
                         <i class="icon_asd fa-solid fa-circle-notch"></i>
@@ -51,7 +48,7 @@
                     </a>
                 </div>
             </div>
-            <!-- Searchbar -->
+
             <div class="bar">
 
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -63,7 +60,7 @@
             </div>
 
             <!-- Contacts -->
-            <!-- div che verrà ripetuto tante volte quanti sono i contatti nel data tramite un v-for -->
+
             <div class="contacts">
 
                 <div 
@@ -88,10 +85,7 @@
             </div>
         </section>
 
-        <!-- Right part -->
         <section class="right_part">
-
-            <!-- Friend -->
             <div class="user">
 
                 <div 
@@ -109,7 +103,6 @@
 
                 <div class="user_icons">
 
-                    <!-- icona 1 2 e 3 -->
                     <a href="#">
 
                         <i class="icon_asd fa-solid fa-magnifying-glass"></i>
@@ -128,7 +121,7 @@
             <!-- Chat -->
             <div class="chat">
 
-                <!-- creazione di dive contentente messaggi, se mandato da friend associa classe verde che lo sposta a destra, se lo manda l'utente associa classe bianca che lo sposta a sinistra -->
+          
                 <div 
                 class="msg_line"
                 v-for="(item2, j) in contacts[activeChat].messages" 
@@ -167,7 +160,7 @@
                 </div>
             </div>
 
-            <!-- Your chat -->
+
             <div class="your_chat bar">
 
                 <a href="#">
